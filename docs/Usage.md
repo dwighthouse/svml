@@ -1,10 +1,10 @@
 How to use SVML.
 
 ## Installation
- # Download the latest version of svml.h. (Found [http://code.google.com/p/svml/source/browse/trunk/svml.h here])
- # Save file to your project folder with the rest of your code.
- # Use `#include "svml.h"` in whatever header files need the functionality.
- # Use the information in Namespace below to gain access to the functionality.
+ 1. Download the latest version of svml.h. (Found [http://code.google.com/p/svml/source/browse/trunk/svml.h here])
+ 2. Save file to your project folder with the rest of your code.
+ 3. Use `#include "svml.h"` in whatever header files need the functionality.
+ 4. Use the information in Namespace below to gain access to the functionality.
 
 ## Namespace
 SVML uses the namespace `SVML`. To obtain the use of each type (including associated functions), simply use `using SVML::vec2;` or whatever primative-based type and dimension you need. If you plan to use your own type for the vector's components, use instead the vector templated type: `using SVML::VECTOR2;` or other dimension. From there, you can define the templated type normally and typedef it to whatever name desired.
