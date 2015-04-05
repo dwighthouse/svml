@@ -88,7 +88,7 @@ struct YZZ
 } yzz;
 ```
 
-Where TYPE is the templated type for the parent union vector type, in this case, VECTOR3. The conversion and assignment operators work nearly identically, but to make the addition function work, three additional variations are required: <Vector, Swizzle>, <Swizzle, Vector>, and <Swizzle, Swizzle>. Each of these simply explicitly converts the swizzle types before calling the <Vector, Vector> variation previously mentioned. In total, they look like this:
+Where TYPE is the templated type for the parent union vector type, in this case, VECTOR3. The conversion and assignment operators work nearly identically, but to make the addition function work, three additional variations are required: `<Vector, Swizzle>`, `<Swizzle, Vector>`, and `<Swizzle, Swizzle>`. Each of these simply explicitly converts the swizzle types before calling the <Vector, Vector> variation previously mentioned. In total, they look like this:
 
 ```
 template <typename SWIZZLE0, typename SWIZZLE1> inline
