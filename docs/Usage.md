@@ -1,7 +1,7 @@
 How to use SVML.
 
 ## Installation
- 1. Download the latest version of svml.h. (Found [http://code.google.com/p/svml/source/browse/trunk/svml.h here])
+ 1. Download the latest version of svml.h. (Found [https://github.com/dwighthouse/svml/blob/master/svml.h](here))
  2. Save file to your project folder with the rest of your code.
  3. Use `#include "svml.h"` in whatever header files need the functionality.
  4. Use the information in Namespace below to gain access to the functionality.

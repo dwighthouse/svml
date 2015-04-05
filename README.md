@@ -17,9 +17,9 @@ my3dVector = my4dVector.xyz * 5;
 my3dVector.zyx += my3dVector.xyz;
 ```
 
-[Usage Doc](https://github.com/dwighthouse/svml/tree/master/docs/Usage.md)
-
-[Technology Overview Doc](https://github.com/dwighthouse/svml/tree/master/docs/TechnologyOverview.md)
+## Documentation
+ * [Usage Doc](https://github.com/dwighthouse/svml/tree/master/docs/Usage.md)
+ * [Technology Overview Doc](https://github.com/dwighthouse/svml/tree/master/docs/TechnologyOverview.md)
 
 ## Status
  * Abandoned
