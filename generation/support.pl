@@ -1,0 +1,160 @@
+#!/usr/bin/perl -w
+
+sub TopData
+{
+	print "#ifndef SVML_H\n";
+	print "#define SVML_H\n";
+	print "\n";
+	print "/*\n";
+	print "\n";
+	print "SVML - Simple Vector Math Library\n";
+	print "Author: Dwight House ( http://dwighthouse.com )\n";
+	print "Assistance by: Dr. Dmitri Volper, Mike Fried, Jeff Hubbard, Chris Peters\n";
+	print "\n";
+	print "Instructions and Information: https://github.com/dwighthouse/svml\n";
+	print "\n";
+	print "Colossians 3:23-24\n";
+	print "\n";
+	print "Copyright (c) 2010-2015 Dwight House\n";
+	print "\n";
+	print "*/\n";
+	print "\n";
+	print "#include <iostream> // cout, endl\n";
+	print "#include <sstream> // ostream, ostringstream, string\n";
+	print "#include <math.h> // sqrt, fabs, min, max, ceil, floor, sin, cos\n";
+	print "\n";
+	print "namespace SVML\n";
+	print "{\n";
+	print "\n";
+	print "//----------------------------------------------------------------------\n";
+	print "// \n";
+	print "// Sec. 01 - Startup, globals, predefinitions, types\n";
+	print "// \n";
+	print "//----------------------------------------------------------------------\n";
+	print "\n";
+	print "using std::cout;\n";
+	print "using std::endl;\n";
+	print "using std::string;\n";
+	print "using std::ostream;\n";
+	print "using std::ostringstream;\n";
+	print "using std::max;\n";
+	print "using std::min;\n";
+	print "\n";
+	print "// Typedefs\n";
+	print "typedef float SCALAR_TYPE;\n";
+	print "\n";
+	print "// Global constants\n";
+	print "const SCALAR_TYPE COMPARISON_EPSILON = (SCALAR_TYPE)0.000001; // Used by AlmostEqual()\n";
+	print "\n";
+	print "// Predefines\n";
+	print "template <typename TYPE> union VECTOR2;\n";
+	print "template <typename TYPE> union VECTOR3;\n";
+	print "template <typename TYPE> union VECTOR4;\n";
+	print "\n";
+	print "// Default types (BUILT-IN TYPE CUSTOMIZATION HERE!)\n";
+	print "typedef VECTOR2<float> vec2;\n";
+	print "typedef VECTOR3<float> vec3;\n";
+	print "typedef VECTOR4<float> vec4;\n";
+	print "// etc.\n";
+	print "\n";
+	print "\n";
+	print "\n";
+	print "//----------------------------------------------------------------------\n";
+	print "// \n";
+	print "// Sec. 02 - Math utilities not specific to vectors\n";
+	print "// \n";
+	print "//----------------------------------------------------------------------\n";
+	print "\n";
+	print "inline SCALAR_TYPE DegToRad(const SCALAR_TYPE& degrees)\n";
+	print "{\n";
+	print "	return degrees * (SCALAR_TYPE)0.017453292519943; // (pi / 180)\n";
+	print "}\n";
+	print "\n";
+	print "inline SCALAR_TYPE RadToDeg(const SCALAR_TYPE& radians)\n";
+	print "{\n";
+	print "	return radians * (SCALAR_TYPE)57.295779513082325; // (180 / pi)\n";
+	print "}\n";
+	print "\n";
+	print "inline SCALAR_TYPE Lerp(const SCALAR_TYPE& start, const SCALAR_TYPE& end, const SCALAR_TYPE& delta)\n";
+	print "{\n";
+	print "	return start + delta * (end - start);\n";
+	print "}\n";
+	print "\n";
+	print "\n";
+	print "\n";
+	print "//----------------------------------------------------------------------\n";
+	print "// \n";
+	print "// Sec. 03 - SFINAE utilities\n";
+	print "// \n";
+	print "//----------------------------------------------------------------------\n";
+	print "\n";
+	print "// EnableIf\n";
+	print "template <typename TYPE, typename R, bool b = TYPE::value> struct EnableIf {};\n";
+	print "template <typename TYPE, typename R> struct EnableIf<TYPE, R, true> { typedef R type; };\n";
+	print "\n";
+	print "// Generic types\n";
+	print "template <typename TYPE> struct Is2D { enum { value = false }; };\n";
+	print "template <typename TYPE> struct Is3D { enum { value = false }; };\n";
+	print "template <typename TYPE> struct Is4D { enum { value = false }; };\n";
+	print "\n";
+	print "// Specific type\n";
+	print "template <typename TYPE> struct Is2D< VECTOR2<TYPE> > { enum { value = true }; };\n";
+	print "template <typename TYPE> struct Is3D< VECTOR3<TYPE> > { enum { value = true }; };\n";
+	print "template <typename TYPE> struct Is4D< VECTOR4<TYPE> > { enum { value = true }; };\n";
+	print "\n";
+	print "\n";
+	print "\n";
+}
+
+sub VectorSectionContent
+{
+	my($dimension, $offset) = @_;
+	
+	print "//----------------------------------------------------------------------\n";
+	print "// \n";
+	print "// Sec. 0" . ($dimension + $offset) . " - " . $dimension . "D vector type and associated functions\n";
+	print "// \n";
+	print "//----------------------------------------------------------------------\n";
+	print "\n";
+}
+
+sub BottomData
+{
+	print "//----------------------------------------------------------------------\n";
+	print "// \n";
+	print "// Sec. 07 - Swizzle operator<< overloads for cout printing\n";
+	print "// \n";
+	print "//----------------------------------------------------------------------\n";
+	print "\n";
+	print "template <typename SWIZZLE> inline\n";
+	print "typename EnableIf< Is2D< typename SWIZZLE::PARENT >, ostream >::type&\n";
+	print "operator<<(ostream& os, const SWIZZLE& printVector)\n";
+	print "{\n";
+	print "\tos << (typename SWIZZLE::PARENT(printVector));\n";
+	print "\treturn os;\n";
+	print "}\n";
+	print "\n";
+	print "template <typename SWIZZLE> inline\n";
+	print "typename EnableIf< Is3D< typename SWIZZLE::PARENT >, ostream >::type&\n";
+	print "operator<<(ostream& os, const SWIZZLE& printVector)\n";
+	print "{\n";
+	print "\tos << (typename SWIZZLE::PARENT(printVector));\n";
+	print "\treturn os;\n";
+	print "}\n";
+	print "\n";
+	print "template <typename SWIZZLE> inline\n";
+	print "typename EnableIf< Is4D< typename SWIZZLE::PARENT >, ostream >::type&\n";
+	print "operator<<(ostream& os, const SWIZZLE& printVector)\n";
+	print "{\n";
+	print "\tos << (typename SWIZZLE::PARENT(printVector));\n";
+	print "\treturn os;\n";
+	print "}\n";
+	print "\n";
+	print "\n";
+	print "\n";
+	print "} // SVML namespace\n";
+	print "\n";
+	print "#endif // SVML_H\n";
+}
+
+return 1;
